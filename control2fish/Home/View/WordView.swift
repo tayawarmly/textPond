@@ -1,5 +1,5 @@
 //
-//  wordView.swift
+//  WordView.swift
 //  control2fish
 //
 //  Created by Taya on 11.09.2023.
@@ -7,12 +7,17 @@
 
 import SwiftUI
 
-struct wordView: View {
+struct WordView: View {
+    @StateObject private var viewModel = WordViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        ForEach(viewModel.randomWord, id: \.self) { word in
+            Text(word)
+        }
     }
 }
 
+
 #Preview {
-    wordView()
+    WordView()
 }

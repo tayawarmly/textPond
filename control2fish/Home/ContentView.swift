@@ -10,31 +10,17 @@ import SwiftUI
 struct ContentView: View {
     
     @State private var gearWindow = false
+    @State private var randomWord = false
     
-    private var words = ["Автограф", "Грабли", "Изощренный", "Органопластика", "Перессорить", "Прикрепиться", "Продернуть", "Продырявиться", "Разноситься", "Сортировщик"]
     
+    //    private var randomeWord: String = []
     @StateObject var viewModel = ContentViewModel()
     
     var body: some View {
         
-        // кнопка шестеренка с всплывающим экраном
-        
-        HStack (spacing: 30) {
-            Spacer()
-            
-            Button {
-                gearWindow.toggle()
-            } label: {
-                Image(systemName: "gearshape.fill")
-                    .foregroundStyle(.black.opacity(0.4))
-            }
-            .sheet(isPresented: $gearWindow) {
-                GearWindowView()}
-        }
-        
-        // сетка цветов
-        
         VStack(spacing: 50) {
+            
+            // сетка цветов
             LazyVGrid(columns: Array(repeating: GridItem(.flexible()), count: 3), spacing: 25, content: {
                 ForEach(viewModel.fiveColors, id: \.self) { color in
                     
@@ -49,29 +35,46 @@ struct ContentView: View {
                 }
             })
             
-        
-            // кнопка сгенерировать
+            Spacer()
             
-            Button(action: {
-
-                // выбирает слово из массива и вывод на экран?
-                func randomWord () -> String {
-                    let randomWord = words.randomElement() ?? "закончились слова"
-                    return (randomWord)
-                }
-            },
-                   label: {
+            // кнопка сгенерировать
+            Button {
+                // выбирает слово из массива
+                randomWord.toggle()
+            } label: {
                 Text("Сгенировать")
                     .bold()
                     .foregroundStyle(.white)
                     .font(.system(size: 20))
                     .frame(width: 150, height: 50)
                     .background(.blue.opacity(0.9), in: Capsule())
-            })
+            }
+            .sheet(isPresented: $randomWord) {
+                WordView()
+                .presentationDragIndicator(.hidden)}
+        }
+        .padding(.vertical, 25)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                
+                // кнопка шестеренка с всплывающим экраном
+                Button {
+                    gearWindow.toggle()
+                } label: {
+                    Image(systemName: "gearshape.fill")
+                        .font(.title)
+                        .foregroundStyle(.black.opacity(0.4))
+                }
+                .sheet(isPresented: $gearWindow) {
+                    GearWindowView()
+                    .presentationDragIndicator(.hidden)}
+            }
         }
     }
 }
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+    }
 }

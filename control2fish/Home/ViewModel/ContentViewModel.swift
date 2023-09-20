@@ -6,11 +6,10 @@
 //
 
 import Foundation
-import SwiftUI
 
 class ContentViewModel: ObservableObject {
-private var colorsForCards: [Color] = [.black, .indigo, .gray, .red, .green, .blue, .cyan, .yellow, .orange, .purple, .brown, .pink]
-    @Published var fiveColors: [Color] = []
+private var colorsForCards = ["black", "indigo", "gray", "red", "green", "blue", "cyan", "yellow", "orange", "purple", "brown", "pink"]
+    @Published var fiveColors: [String] = []
     
     init() {
         fillFiveColors()
@@ -20,14 +19,16 @@ private var colorsForCards: [Color] = [.black, .indigo, .gray, .red, .green, .bl
         for _ in 1...5 {
             fiveColors.append(generateUniqueColor())
         }
-    }
-    func deleteCurrentColor(id: Color) {
-        fiveColors.removeAll(where:  { $0 == id })
+        print(fiveColors)
     }
     
-    private func generateUniqueColor() -> Color {
+    func deleteCurrentColor(id: String) {
+//        fiveColors.removeAll(where:  { $0 as! String == id })
+    }
+    
+    private func generateUniqueColor() -> String {
         let generatedColor = colorsForCards.randomElement()
         colorsForCards.removeAll(where: { $0 == generatedColor })
-        return generatedColor ?? .white
+        return generatedColor ?? "orange"
     }
 }
