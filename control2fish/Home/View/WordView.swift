@@ -11,8 +11,8 @@ struct WordView: View {
     @StateObject private var viewModel = WordViewModel()
     
     var body: some View {
-        ForEach(viewModel.randomWord, id: \.self) { word in
-            Text(word)
+        ForEach(viewModel.randomWords, id: \.self) { word in
+            Text(word ?? "")
         }
     }
 }

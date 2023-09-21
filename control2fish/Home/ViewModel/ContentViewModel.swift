@@ -19,7 +19,6 @@ private var colorsForCards = ["black", "indigo", "gray", "red", "green", "blue",
         for _ in 1...5 {
             fiveColors.append(generateUniqueColor())
         }
-        print(fiveColors)
     }
     
     func deleteCurrentColor(id: String) {
