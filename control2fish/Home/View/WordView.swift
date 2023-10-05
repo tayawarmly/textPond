@@ -9,15 +9,20 @@ import SwiftUI
 
 struct WordView: View {
     @StateObject private var viewModel = WordViewModel()
-    
+    @State var selectedColor: String
     var body: some View {
-        ForEach(viewModel.randomWords, id: \.self) { word in
-            Text(word ?? "")
+        VStack {
+            Text(viewModel.generatedText)
+                .padding(.horizontal, 15)
+                .padding(.top, 30)
+            
+            Spacer()
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(selectedColor))
     }
 }
 
-
 #Preview {
-    WordView()
+    WordView(selectedColor: "pink14")
 }

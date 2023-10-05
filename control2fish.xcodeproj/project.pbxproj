@@ -86,7 +86,6 @@
 		DEDE02852AAA2F8800331615 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				DEDE02742AA7802100331615 /* ContentView.swift */,
 				DEDE02862AAA2F9A00331615 /* View */,
 				DEDE02872AAA2FA300331615 /* ViewModel */,
 			);
@@ -96,6 +95,7 @@
 		DEDE02862AAA2F9A00331615 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DEDE02742AA7802100331615 /* ContentView.swift */,
 				DE72AF622AAF4DE400534FF4 /* GearWindowView.swift */,
 				DE72AF642AAF561400534FF4 /* WordView.swift */,
 			);
