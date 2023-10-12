@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DE018A222AB97BED00D56F4D /* WordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE018A212AB97BED00D56F4D /* WordViewModel.swift */; };
+		DE4ED96D2AD0668800E7D60F /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE4ED96C2AD0668800E7D60F /* InfoView.swift */; };
 		DE72AF632AAF4DE400534FF4 /* GearWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE72AF622AAF4DE400534FF4 /* GearWindowView.swift */; };
 		DE72AF652AAF561400534FF4 /* WordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE72AF642AAF561400534FF4 /* WordView.swift */; };
 		DEDE02732AA7802100331615 /* control2fishApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEDE02722AA7802100331615 /* control2fishApp.swift */; };
@@ -19,6 +20,7 @@
 
 /* Begin PBXFileReference section */
 		DE018A212AB97BED00D56F4D /* WordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordViewModel.swift; sourceTree = "<group>"; };
+		DE4ED96C2AD0668800E7D60F /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		DE72AF622AAF4DE400534FF4 /* GearWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GearWindowView.swift; sourceTree = "<group>"; };
 		DE72AF642AAF561400534FF4 /* WordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordView.swift; sourceTree = "<group>"; };
 		DEDE026F2AA7802100331615 /* control2fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = control2fish.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -98,6 +100,7 @@
 				DEDE02742AA7802100331615 /* ContentView.swift */,
 				DE72AF622AAF4DE400534FF4 /* GearWindowView.swift */,
 				DE72AF642AAF561400534FF4 /* WordView.swift */,
+				DE4ED96C2AD0668800E7D60F /* InfoView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				DEDE02752AA7802100331615 /* ContentView.swift in Sources */,
 				DEDE02732AA7802100331615 /* control2fishApp.swift in Sources */,
 				DE72AF632AAF4DE400534FF4 /* GearWindowView.swift in Sources */,
+				DE4ED96D2AD0668800E7D60F /* InfoView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

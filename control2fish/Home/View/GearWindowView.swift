@@ -10,11 +10,11 @@ import SwiftUI
 struct GearWindowView: View {
     
     @StateObject var viewModel: ContentViewModel
-    @State var gearSelectedColor: String
+    @State var gearWindowOpen: Bool
     
-    init(gearSelectedColor: String) {
+    init(gearWindowOpen: Bool) {
         self._viewModel = StateObject(wrappedValue: ContentViewModel.shared)
-        self.gearSelectedColor = gearSelectedColor
+        self.gearWindowOpen = gearWindowOpen
     }
     
     var body: some View {
@@ -28,7 +28,11 @@ struct GearWindowView: View {
                 ForEach(viewModel.allColors, id: \.self) { color in
                     
                     Button {
-                        gearSelectedColor = color
+                        withAnimation(.spring) {
+                            viewModel.gearSelectedColor = color
+                            viewModel.addGearColor()
+                            gearWindowOpen = false
+                        }
                     } label: {
                         Rectangle()
                             .frame(width: 75, height: 75)
@@ -38,9 +42,8 @@ struct GearWindowView: View {
                             .overlay {
                                 RoundedRectangle(cornerRadius: 15)
                                     .tint(.clear)
-                                    .border(gearSelectedColor == color ? Color.blue : Color.clear, width: 5)
-                                }
-
+                                    .border(viewModel.gearSelectedColor == color ? Color.green : Color.clear, width: 5)
+                            }
                     }
                 }
             })
@@ -48,6 +51,6 @@ struct GearWindowView: View {
     }
 }
 #Preview {
-    GearWindowView(gearSelectedColor: "pink14")
+    GearWindowView(gearWindowOpen: false)
 }
 

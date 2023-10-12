@@ -8,12 +8,12 @@
 import SwiftUI
 
 struct ContentView: View {
-   
+    
     @StateObject var viewModel: ContentViewModel
+    @State private var infoWindow = false
     @State private var gearWindow = false
     @State private var randomWord = false
-    @State var selectedColor = ""
-    @State var gearSelectedColor = ""
+    @State var gearWindowOpen = true
     
     init() {
         self._viewModel = StateObject(wrappedValue: ContentViewModel.shared)
@@ -28,19 +28,20 @@ struct ContentView: View {
                     ForEach(viewModel.fiveColors, id: \.self) { color in
                         
                         Button {
-                            selectedColor = color
+                            withAnimation(.spring) {
+                                viewModel.selectedColor = color
+                            }
                         } label: {
                             Rectangle()
                                 .frame(width: 75, height: 75)
-                              
                                 .cornerRadius(15)
                                 .foregroundStyle(Color(color))
                                 .shadow(radius: 1.2)
                                 .overlay {
                                     RoundedRectangle(cornerRadius: 15)
                                         .tint(.clear)
-                                        .border(selectedColor == color ? Color.blue : Color.clear, width: 5)
-                                    }
+                                        .border(viewModel.selectedColor == color ? Color.green : Color.clear, width: 5)
+                                }
                         }
                     }
                 })
@@ -49,23 +50,46 @@ struct ContentView: View {
                 
                 // кнопка сгенерировать
                 Button {
+                    if viewModel.selectedColor.isEmpty {
+                        viewModel.defaultRandomColor()
+                    }
                     // выбирает слово из массива
                     randomWord.toggle()
-                    viewModel.deleteCurrentColor(selectedColor: selectedColor)
+                    viewModel.deleteCurrentColor()
                 } label: {
-                    Text("Сгенировать")
+                    Text("Сгенерировать")
                         .bold()
                         .foregroundStyle(.white)
                         .font(.system(size: 20))
-                        .frame(width: 150, height: 50)
+                        .frame(width: 170, height: 50)
                         .background(.blue.opacity(0.9), in: Capsule())
                 }
                 .sheet(isPresented: $randomWord) {
-                    WordView(selectedColor: selectedColor)
+                    WordView(selectedColor: viewModel.selectedColor)
                     .presentationDragIndicator(.hidden)}
+                .onAppear {viewModel.selectedColor = ""}
             }
+            .padding(20)
+            .background(.white.opacity(0.3))
+            .cornerRadius(25)
+            .padding(5)
+            .background(Image("bgImage"))
             .padding(.vertical, 25)
             .toolbar {
+                // кнопка с информацией
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        infoWindow.toggle()
+                    } label: {
+                        Image(systemName: "exclamationmark.circle.fill")
+                            .font(.title)
+                            .foregroundStyle(.black.opacity(0.4))
+                    }
+                    .sheet(isPresented: $infoWindow) {
+                        InfoView()
+                        .presentationDragIndicator(.hidden)}
+                }
+
                 ToolbarItem(placement: .topBarTrailing) {
                     
                     // кнопка шестеренка с всплывающим экраном
@@ -76,9 +100,13 @@ struct ContentView: View {
                             .font(.title)
                             .foregroundStyle(.black.opacity(0.4))
                     }
-                    .sheet(isPresented: $gearWindow) {
-                        GearWindowView(gearSelectedColor: gearSelectedColor)
-                        .presentationDragIndicator(.hidden)}
+                    .sheet(isPresented: $gearWindow, onDismiss: {
+                        gearWindowOpen = true
+//                        viewModel.gearSelectedColor = "pink14"
+                            }, content: {
+                                GearWindowView(gearWindowOpen: gearWindowOpen)
+                                .presentationDragIndicator(.hidden)
+                            })
                 }
             }
         }
@@ -86,5 +114,5 @@ struct ContentView: View {
 }
 // TODO: функцию доб цвета на 1 экран
 #Preview {
-        ContentView()
+    ContentView()
 }

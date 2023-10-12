@@ -14,9 +14,10 @@ class WordViewModel: ObservableObject {
     init() {getRandomWords()}
     
     private func getRandomWords () {
-        for i in 0..<words.count {
-            let randomWord = words.randomElement()
-            generatedText += i == 0 ? (randomWord ?? "") : " " + (randomWord ?? "").lowercased()
-            }
+        for i in 0..<50 {
+            let randomWord = words.randomElement() ?? ""
+            generatedText += i == 0 ? randomWord : " " + randomWord.lowercased()
+            words.removeAll(where: { $0 == randomWord})
         }
     }
+}
