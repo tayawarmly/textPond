@@ -9,15 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @StateObject var viewModel: ContentViewModel
+    @StateObject private var viewModel = ContentViewModel()
     @State private var infoWindow = false
     @State private var gearWindow = false
     @State private var randomWord = false
-    @State var gearWindowOpen = true
+    @State private var gearWindowOpen = true
+    @State private var wordsQuantity = 10
     
-    init() {
-        self._viewModel = StateObject(wrappedValue: ContentViewModel.shared)
-    }
+//    init() {
+//        self._viewModel = StateObject(wrappedValue: ContentViewModel.shared)
+//    }
     
     var body: some View {
         NavigationStack {
@@ -48,6 +49,24 @@ struct ContentView: View {
                 
                 Spacer()
                 
+                // слайдер + окно с цифрами
+                //
+                Capsule()
+                    .fill(Color.white)
+                    .frame(width: 100, height: 40)
+                    .overlay {
+                        Capsule().stroke(Color.orange, lineWidth: 3)
+                    }
+                    .overlay {
+                        Text(wordsQuantity.description)
+                            .font(.title2)
+                            .bold()
+                    }
+                
+                SliderView(offset: $wordsQuantity)
+                
+                Spacer()
+                
                 // кнопка сгенерировать
                 Button {
                     if viewModel.selectedColor.isEmpty {
@@ -67,13 +86,16 @@ struct ContentView: View {
                 .sheet(isPresented: $randomWord) {
                     WordView(selectedColor: viewModel.selectedColor)
                     .presentationDragIndicator(.hidden)}
-                .onAppear {viewModel.selectedColor = ""}
+                .onChange(of: randomWord) { newValue in
+                    if !newValue { viewModel.selectedColor = "" }
+                }
             }
             .padding(20)
             .background(.white.opacity(0.3))
             .cornerRadius(25)
             .padding(5)
-            .background(Image("bgImage"))
+//            .background(Image("bgImage"))
+            .background(Color.black.opacity(0.2))
             .padding(.vertical, 25)
             .toolbar {
                 // кнопка с информацией
@@ -89,7 +111,7 @@ struct ContentView: View {
                         InfoView()
                         .presentationDragIndicator(.hidden)}
                 }
-
+                
                 ToolbarItem(placement: .topBarTrailing) {
                     
                     // кнопка шестеренка с всплывающим экраном
@@ -102,17 +124,22 @@ struct ContentView: View {
                     }
                     .sheet(isPresented: $gearWindow, onDismiss: {
                         gearWindowOpen = true
-//                        viewModel.gearSelectedColor = "pink14"
-                            }, content: {
-                                GearWindowView(gearWindowOpen: gearWindowOpen)
-                                .presentationDragIndicator(.hidden)
-                            })
+                        //                        viewModel.gearSelectedColor = "pink14"
+                    }, content: {
+                        GearWindowView(gearWindowOpen: gearWindowOpen)
+                            .presentationDragIndicator(.hidden)
+                    })
+                    .onChange(of: randomWord) { newValue in
+                        if !newValue { viewModel.selectedColor = "" }
+                    }
                 }
             }
         }
     }
+    
+    
 }
-// TODO: функцию доб цвета на 1 экран
+
 #Preview {
     ContentView()
 }
