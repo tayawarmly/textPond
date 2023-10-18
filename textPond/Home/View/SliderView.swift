@@ -18,11 +18,11 @@ struct SliderView: View {
                 .frame(height: 30)
             
             Capsule()
-                .fill(Color.yellow.opacity(0.75))
+                .fill(Color("setYellow").opacity(0.75))
                 .frame(width: CGFloat(offset) + 20, height: 30)
             
             Circle()
-                .fill(Color.orange)
+                .fill(Color("setOrange"))
                 .frame(width: 35, height: 35)
                 .background(Circle().stroke(Color.white, lineWidth: 5))
                 .offset(x: CGFloat(offset))

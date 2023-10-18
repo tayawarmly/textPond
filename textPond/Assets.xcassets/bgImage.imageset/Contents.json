@@ -1,11 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "IMG_2428.jpg",
+      "filename" : "фон1.jpg",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "фон паттерн.jpg",
       "idiom" : "universal",
       "scale" : "2x"
     },

@@ -16,10 +16,6 @@ struct ContentView: View {
     @State private var gearWindowOpen = true
     @State private var wordsQuantity = 10
     
-//    init() {
-//        self._viewModel = StateObject(wrappedValue: ContentViewModel.shared)
-//    }
-    
     var body: some View {
         NavigationStack {
             VStack(spacing: 50) {
@@ -81,7 +77,7 @@ struct ContentView: View {
                         .foregroundStyle(.white)
                         .font(.system(size: 20))
                         .frame(width: 170, height: 50)
-                        .background(.blue.opacity(0.9), in: Capsule())
+                        .background(Color("setBlueDark").opacity(0.9), in: Capsule())
                 }
                 .sheet(isPresented: $randomWord) {
                     WordView(selectedColor: viewModel.selectedColor)
@@ -91,11 +87,10 @@ struct ContentView: View {
                 }
             }
             .padding(20)
-            .background(.white.opacity(0.3))
+            .background(Color("setYellow").opacity(0.8))
             .cornerRadius(25)
             .padding(5)
-//            .background(Image("bgImage"))
-            .background(Color.black.opacity(0.2))
+            .background(Image("bgImage").resizable().scaledToFill())
             .padding(.vertical, 25)
             .toolbar {
                 // кнопка с информацией

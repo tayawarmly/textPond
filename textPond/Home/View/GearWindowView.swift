@@ -48,6 +48,7 @@ struct GearWindowView: View {
                 }
             })
         }
+        .background(Image("bgGear").resizable().scaledToFill())
     }
 }
 #Preview {

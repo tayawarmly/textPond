@@ -152,7 +152,7 @@
 					};
 				};
 			};
-			buildConfigurationList = DEDE026A2AA7802100331615 /* Build configuration list for PBXProject "control2fish" */;
+			buildConfigurationList = DEDE026A2AA7802100331615 /* Build configuration list for PBXProject "text pond" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -391,7 +391,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		DEDE026A2AA7802100331615 /* Build configuration list for PBXProject "control2fish" */ = {
+		DEDE026A2AA7802100331615 /* Build configuration list for PBXProject "text pond" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				DEDE027B2AA7802400331615 /* Debug */,
